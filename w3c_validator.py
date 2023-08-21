@@ -67,7 +67,8 @@ def __validate(file_path, type):
     for m in messages:
         # Capture files that have incomplete or broken HTML
         if m['type'] == 'error' or m['type'] == 'info':
-            res.append("'{}' => {}".format(file_path, m['message']))
+            line_number = m.get('lastLine', 'N/A')
+            res.append("'{}' => Line {}: {}".format(file_path, line_number, m['message']))
         else:
             res.append("[{}:{}] {}".format(
                 file_path, m['lastLine'], m['message']))
